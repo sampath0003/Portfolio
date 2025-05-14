@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight, Code, CheckCircle, ExternalLink } from 'lucide-react';
+import { ChevronRight, Code, CheckCircle, ExternalLink, Car, Brain } from 'lucide-react';
 
 interface ProjectsProps {
   isDarkMode: boolean;
@@ -12,28 +12,34 @@ const Projects: React.FC<ProjectsProps> = ({ isDarkMode }) => {
   const projects = [
     {
       title: 'Wheels for Rentals',
-      description: 'A responsive web application for vehicle rentals with seamless user experience and integrated payment system.',
-      image: 'https://images.pexels.com/photos/35967/mini-cooper-auto-model-vehicle.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      technologies: ['JavaScript (ES6+)', 'HTML5', 'CSS3', 'React.js', 'RESTful APIs'],
+      description: 'A modern vehicle rental platform built with React.js, featuring a sleek user interface, secure payment processing, and real-time availability tracking.',
+      image: 'https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      icon: Car,
+      technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Stripe API', 'JWT Auth'],
       features: [
-        'Developed a highly responsive interface for seamless vehicle rentals',
-        'Integrated RESTful APIs for smooth backend communication',
-        'Implemented comprehensive form validation for accurate data entry',
-        'Created a dynamic booking calendar with real-time availability updates',
+        'Intuitive vehicle search and filtering system',
+        'Real-time availability calendar and booking management',
+        'Secure payment processing with Stripe integration',
+        'User authentication and profile management',
+        'Responsive design for all device sizes',
+        'Admin dashboard for fleet management'
       ],
-      link: '#',
-      github: '#',
+      link: 'https://wheels-for-rentals.netlify.app',
+      github: 'https://github.com/sampath0003/wheels-for-rentals',
     },
     {
-      title: 'Brain Tumor Classification and Segmentation',
-      description: 'An advanced machine learning project that classifies and segments brain tumors from MRI scans with high accuracy.',
-      image: 'https://images.pexels.com/photos/2280551/pexels-photo-2280551.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      technologies: ['Python', 'Inception V3', 'ResNet50', 'OpenCV', 'TensorFlow'],
+      title: 'Brain Tumor Classification',
+      description: 'An advanced deep learning project that utilizes state-of-the-art neural networks to classify and segment brain tumors from MRI scans with high accuracy.',
+      image: 'https://images.pexels.com/photos/2280551/pexels-photo-2280551.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      icon: Brain,
+      technologies: ['Python', 'TensorFlow', 'Inception V3', 'ResNet50', 'OpenCV', 'NumPy'],
       features: [
         'Achieved 95% accuracy in tumor classification',
-        'Optimized image quality for better model performance',
-        'Implemented multi-class segmentation for MRI scans',
-        'Developed data augmentation techniques to improve model generalization',
+        'Implemented multi-class segmentation for precise tumor boundary detection',
+        'Data augmentation for improved model generalization',
+        'Interactive web interface for medical professionals',
+        'Comprehensive visualization of results',
+        'Export functionality for medical reports'
       ],
       link: '#',
       github: '#',
@@ -68,10 +74,10 @@ const Projects: React.FC<ProjectsProps> = ({ isDarkMode }) => {
         transition={{ duration: 0.5 }}
         className="text-center mb-12"
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Projects</h2>
-        <div className="w-20 h-1 bg-primary-600 mx-auto mb-6"></div>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
+        <div className="w-20 h-1 bg-gradient-to-r from-primary-500 to-accent-500 mx-auto mb-6"></div>
         <p className={`max-w-2xl mx-auto ${isDarkMode ? 'text-neutral-300' : 'text-neutral-600'}`}>
-          Explore my latest projects showcasing my technical skills and problem-solving abilities.
+          Showcasing my technical expertise through real-world applications and innovative solutions.
         </p>
       </motion.div>
 
@@ -86,21 +92,27 @@ const Projects: React.FC<ProjectsProps> = ({ isDarkMode }) => {
           <motion.div
             key={index}
             variants={item}
-            className={`overflow-hidden rounded-xl shadow-md transition-all duration-300 ${
-              isDarkMode ? 'bg-neutral-800' : 'bg-white'
+            className={`overflow-hidden rounded-xl shadow-lg transition-all duration-300 ${
+              isDarkMode 
+                ? 'bg-neutral-900/50 hover:bg-neutral-800/50 backdrop-blur-sm' 
+                : 'bg-white hover:shadow-xl'
             }`}
           >
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="overflow-hidden h-64 md:h-auto">
+              <div className="relative overflow-hidden h-64 md:h-auto group">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <project.icon size={48} className="absolute bottom-4 left-4 text-white/80" />
               </div>
               <div className="p-6 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
+                  <h3 className="text-2xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400">
+                    {project.title}
+                  </h3>
                   <p className={`mb-4 ${isDarkMode ? 'text-neutral-300' : 'text-neutral-600'}`}>
                     {project.description}
                   </p>
@@ -111,7 +123,7 @@ const Projects: React.FC<ProjectsProps> = ({ isDarkMode }) => {
                           key={techIndex}
                           className={`px-3 py-1 text-sm rounded-full ${
                             isDarkMode
-                              ? 'bg-neutral-700 text-neutral-200'
+                              ? 'bg-neutral-800 text-neutral-200'
                               : 'bg-neutral-100 text-neutral-700'
                           }`}
                         >
@@ -125,7 +137,7 @@ const Projects: React.FC<ProjectsProps> = ({ isDarkMode }) => {
                   <button
                     onClick={() => handleProjectClick(index)}
                     className={`flex items-center text-sm font-medium mb-4 ${
-                      isDarkMode ? 'text-primary-400' : 'text-primary-600'
+                      isDarkMode ? 'text-accent-400 hover:text-accent-300' : 'text-accent-600 hover:text-accent-500'
                     }`}
                   >
                     <span>View Features</span>
@@ -147,7 +159,7 @@ const Projects: React.FC<ProjectsProps> = ({ isDarkMode }) => {
                     >
                       {project.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-start mb-2">
-                          <CheckCircle size={16} className="text-primary-500 mt-1 mr-2 flex-shrink-0" />
+                          <CheckCircle size={16} className="text-accent-500 mt-1 mr-2 flex-shrink-0" />
                           <span className="text-sm">{feature}</span>
                         </li>
                       ))}
@@ -159,9 +171,9 @@ const Projects: React.FC<ProjectsProps> = ({ isDarkMode }) => {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`inline-flex items-center px-4 py-2 rounded text-sm font-medium ${
+                      className={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                         isDarkMode
-                          ? 'bg-neutral-700 hover:bg-neutral-600 text-white'
+                          ? 'bg-neutral-800 hover:bg-neutral-700 text-white'
                           : 'bg-neutral-200 hover:bg-neutral-300 text-neutral-800'
                       }`}
                     >
@@ -172,10 +184,10 @@ const Projects: React.FC<ProjectsProps> = ({ isDarkMode }) => {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`inline-flex items-center px-4 py-2 rounded text-sm font-medium ${
+                      className={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                         isDarkMode
-                          ? 'bg-primary-600 hover:bg-primary-500 text-white'
-                          : 'bg-primary-600 hover:bg-primary-700 text-white'
+                          ? 'bg-accent-600 hover:bg-accent-500 text-white'
+                          : 'bg-accent-600 hover:bg-accent-700 text-white'
                       }`}
                     >
                       <ExternalLink size={16} className="mr-2" />
